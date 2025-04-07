@@ -36,7 +36,7 @@ const Hero = () => {
               <div className="aspect-[4/3] rounded overflow-hidden bg-gray-200">
                 {imagesLoaded ? (
                   <img 
-                    src="/placeholder.svg" 
+                    src="/heromain.jpg" 
                     alt="School children learning" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -53,9 +53,23 @@ const Hero = () => {
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-2 rounded-lg shadow-xl -rotate-6">
               <div className="aspect-[1/1] w-32 rounded overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-r from-[#8B5CF6] to-[#F97316] flex items-center justify-center">
-                  <p className="text-white font-bold text-center px-4">SAC</p>
-                </div>
+              <div className="aspect-[4/3] rounded overflow-hidden bg-gray-200">
+                {imagesLoaded ? (
+                  <img 
+                    src="/herologo.jpg" 
+                    alt="School children learning" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      console.log("Image failed to load");
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">Loading image...</span>
+                  </div>
+                )}
+              </div>
               </div>
             </div>
           </div>
