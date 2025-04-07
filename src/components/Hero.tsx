@@ -1,7 +1,16 @@
 
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  // Use state to handle image loading
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  
+  useEffect(() => {
+    // Set images as loaded after component mounts
+    setImagesLoaded(true);
+  }, []);
+
   return (
     <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-blue-100 to-green-100">
       <div className="container-custom">
@@ -24,12 +33,22 @@ const Hero = () => {
           </div>
           <div className="w-full md:w-1/2 relative animate-fade-in" style={{ animationDelay: "0.3s" }}>
             <div className="bg-white p-2 rounded-lg shadow-xl rotate-3 mb-4">
-              <div className="aspect-[4/3] rounded overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1122&q=80" 
-                  alt="School children learning" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="aspect-[4/3] rounded overflow-hidden bg-gray-200">
+                {imagesLoaded ? (
+                  <img 
+                    src="/placeholder.svg" 
+                    alt="School children learning" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      console.log("Image failed to load");
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">Loading image...</span>
+                  </div>
+                )}
               </div>
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-2 rounded-lg shadow-xl -rotate-6">
